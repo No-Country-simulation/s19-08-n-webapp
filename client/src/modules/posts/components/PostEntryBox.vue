@@ -1,0 +1,24 @@
+<script setup lang="ts"></script>
+
+<template>
+  <section class="card card-compact bg-base-100 shadow-lg mt-4">
+    <h2 class="sr-only">Crear una nueva publicación.</h2>
+    <div class="card-body flex-row">
+      <div class="avatar">
+        <div class="size-10 sm:size-12 rounded-full">
+          <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+        </div>
+      </div>
+      <button
+        type="button"
+        class="input input-bordered input-primary flex h-auto w-full rounded-full"
+      >
+        <span class="self-center">
+          <strong class="text-gray-400 font-normal text-sm sm:text-base"
+            >Inicia una publicación</strong
+          >
+        </span>
+      </button>
+    </div>
+  </section>
+</template>
