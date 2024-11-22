@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, useId } from 'vue';
+import { useId } from 'vue';
 import { useLocalStorage } from '@vueuse/core';
 
 import SunIcon from '../icons/SunIcon.vue';
@@ -7,62 +7,70 @@ import MoonIcon from '../icons/MoonIcon.vue';
 import SystemIcon from '../icons/SystemIcon.vue';
 
 const id = useId();
-const theme = useLocalStorage('theme', '');
-
-const systemRef = ref<HTMLInputElement | null>(null);
-const lightRef = ref<HTMLInputElement | null>(null);
-const darkRef = ref<HTMLInputElement | null>(null);
+const theme = useLocalStorage('theme', '', { writeDefaults: false });
 
 const getSwitchId = (theme: string) => `theme-switch-${theme}-${id}`;
+
+const themeChangeHanlder = (event: Event) => {
+  const t = (event.target as HTMLInputElement).value;
+  theme.value = t;
+  document.documentElement.setAttribute('data-theme', t);
+};
 </script>
 
 <template>
-  <fieldset class="theme-controller">
+  <fieldset class="controller-container">
     <legend class="sr-only">Select a display theme:</legend>
     <span>
       <input
-        ref="systemRef"
         :id="getSwitchId('system')"
         type="radio"
         value="system"
+        name="theme-radios"
+        :checked="theme === 'system'"
         class="peer theme-switch"
+        @change="themeChangeHanlder($event)"
       />
       <label :for="getSwitchId('system')" class="theme-switch-label">
         <span class="sr-only">system</span>
-        <system-icon />
+        <system-icon aria-hidden="true" />
       </label>
     </span>
     <span>
       <input
-        ref="lightRef"
         :id="getSwitchId('light')"
         type="radio"
         value="light"
+        name="theme-radios"
+        :checked="theme === 'light'"
         class="peer theme-switch"
+        @change="themeChangeHanlder($event)"
       />
       <label :for="getSwitchId('light')" class="theme-switch-label">
         <span class="sr-only">light</span>
-        <sun-icon />
+        <sun-icon aria-hidden="true" />
       </label>
     </span>
     <span>
       <input
-        ref="darkRef"
         :id="getSwitchId('dark')"
         type="radio"
         value="dark"
+        name="theme-radios"
+        :checked="theme === 'dark'"
         class="peer theme-switch"
+        @change="themeChangeHanlder($event)"
       />
       <label :for="getSwitchId('dark')" class="theme-switch-label">
         <span class="sr-only">dark</span>
-        <moon-icon />
+        <moon-icon aria-hidden="true" />
       </label>
     </span>
   </fieldset>
 </template>
 
 <style scoped lang="css">
-.theme-controller {
+.controller-container {
   @apply flex rounded-full p-0 m-0 border-0 shadow-[0_0_0_1px] shadow-current;
 }
 
