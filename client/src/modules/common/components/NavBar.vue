@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import LogOutIcon from '../icons/LogOutIcon.vue';
+import SearchIcon from '../icons/SearchIcon.vue';
 import ThemeController from './ThemeController.vue';
 </script>
 
 <template>
-  <header class="navbar bg-base-100">
-    <div class="flex-1">
+  <header class="navbar bg-base-100 sticky top-0 z-[1] shadow-lg">
+    <div class="hidden sm:block flex-1">
       <a class="btn btn-ghost text-xl">FreeConnect</a>
     </div>
-    <div class="flex-none gap-2">
-      <div class="form-control">
-        <input
-          type="search"
-          placeholder="Buscar"
-          class="input input-bordered w-24 md:w-auto bg-base-200"
-        />
+    <div class="flex-1 sm:flex-none gap-2">
+      <div class="form-control w-full">
+        <label class="input input-bordered flex items-center gap-2 bg-base-200">
+          <input type="search" class="grow" placeholder="Buscar" />
+          <search-icon class="h-4 w-4 opacity-70" />
+        </label>
       </div>
       <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
