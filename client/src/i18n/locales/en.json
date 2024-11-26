@@ -1,0 +1,27 @@
+{
+  "login": {},
+  "register": {},
+  "posts": {
+    "btn_start": "Start a post",
+    "card": {
+      "btn_collab": "",
+      "new": ""
+    },
+    "create_form": {}
+  },
+  "common": {
+    "navbar": {
+      "search": "Search",
+      "profile": "Profile",
+      "settings": "Settings",
+      "appearance": "Theme",
+      "logout": "Log Out"
+    },
+    "theme_controller": {
+      "select": "Select a display theme:",
+      "system": "system",
+      "light": "light",
+      "dark": "dark"
+    }
+  }
+}

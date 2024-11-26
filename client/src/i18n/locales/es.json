@@ -1,0 +1,27 @@
+{
+  "login": {},
+  "register": {},
+  "posts": {
+    "btn_start": "Inicia una publicación",
+    "card": {
+      "btn_collab": "",
+      "new": ""
+    },
+    "create_form": {}
+  },
+  "common": {
+    "navbar": {
+      "search": "Buscar",
+      "profile": "Perfil",
+      "settings": "Configuración",
+      "appearance": "Aspecto",
+      "logout": "Cerrar sesión"
+    },
+    "theme_controller": {
+      "select": "Seleccione un tema de visualización:",
+      "system": "sistema",
+      "light": "claro",
+      "dark": "oscuro"
+    }
+  }
+}
