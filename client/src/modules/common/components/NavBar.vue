@@ -11,8 +11,8 @@ import ThemeController from './ThemeController.vue';
     </div>
     <div class="flex-1 sm:flex-none gap-2">
       <div class="form-control w-full">
-        <label class="input input-bordered flex items-center gap-2 bg-base-200">
-          <input type="search" class="grow" placeholder="Buscar" />
+        <label class="input input-primary input-bordered flex items-center gap-2 bg-base-200">
+          <input type="search" class="grow" :placeholder="$t('common.navbar.search')" />
           <search-icon class="h-4 w-4 opacity-70" />
         </label>
       </div>
@@ -27,22 +27,25 @@ import ThemeController from './ThemeController.vue';
         </div>
         <ul
           tabindex="0"
-          class="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow-lg shadow-base-300"
+          class="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow-lg"
         >
           <li>
-            <a>Perfil</a>
+            <a>{{ $t('common.navbar.profile') }}</a>
+          </li>
+          <li>
+            <a>{{ $t('common.navbar.settings') }}</a>
           </li>
           <li>
             <div class="justify-between !cursor-auto">
-              Aspecto
+              {{ $t('common.navbar.appearance') }}
               <theme-controller />
             </div>
           </li>
           <li>
-            <div class="justify-between">
-              <span>Cerrar sesión</span>
+            <button type="button" class="justify-between">
+              <span>{{ $t('common.navbar.logout') }}</span>
               <log-out-icon class="w-4 h-4" />
-            </div>
+            </button>
           </li>
         </ul>
       </div>

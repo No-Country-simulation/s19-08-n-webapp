@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { usePostsStore } from '../stores/posts.store';
+
+const postsStore = usePostsStore();
+</script>
 
 <template>
   <section class="card card-compact bg-base-100 shadow-lg mt-4">
@@ -11,6 +15,7 @@
       </div>
       <button
         type="button"
+        @click="postsStore.isModalCreateOpen = true"
         class="input input-bordered input-primary flex h-auto w-full rounded-full"
       >
         <span class="self-center">

@@ -2,6 +2,7 @@
 import type { Post } from '../interfaces/post.interface';
 
 interface Props {
+  num: number;
   post: Post;
 }
 
@@ -9,28 +10,51 @@ defineProps<Props>();
 </script>
 
 <template>
-  <article class="card bg-base-100 w-full shadow-lg">
+  <article class="card bg-base-100 w-full shadow-lg" :aria-label="`Post number ${num}`">
     <figure class="h-[20rem]">
       <img :src="post.images[0]" :alt="post.title" class="w-full h-full object-cover" />
     </figure>
-    <section class="card-body">
-      <em>{{ post.published_date }}</em>
-      <h2 class="card-title">
-        {{ post.title }}
-        <div
-          :class="[
-            'badge uppercase',
-            {
-              'badge-secondary': post.status === 'nuevo',
-              'badge-success': post.status === 'activo',
-              'badge-accent': post.status === 'completado',
-            },
-          ]"
-        >
-          {{ post.status }}
+
+    <div class="card-body">
+      <section class="card" aria-label="">
+        <div class="flex gap-2">
+          <a class="avatar" href="#">
+            <div class="size-10 rounded-full">
+              <img
+                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                alt=""
+              />
+            </div>
+          </a>
+          <a href="#" class="">
+            <span
+              class="block w-fit leading-5 font-semibold hover:text-secondary hover:underline"
+              >{{ post.author }}</span
+            >
+            <span class="block text-sm text-gray-500">Example | Example | Example</span>
+            <span class="block text-sm italic text-gray-500">{{ post.published_date }}</span>
+          </a>
         </div>
-      </h2>
-      <p>{{ post.description }}</p>
+      </section>
+
+      <section>
+        <h2 class="card-title">
+          {{ post.title }}
+          <span
+            :class="[
+              'badge uppercase',
+              {
+                'badge-secondary': post.status === 'nuevo',
+                'badge-success': post.status === 'activo',
+                'badge-accent': post.status === 'completado',
+              },
+            ]"
+          >
+            {{ post.status }}
+          </span>
+        </h2>
+        <p>{{ post.description }}</p>
+      </section>
 
       <div class="divider my-0"></div>
 
@@ -60,9 +84,9 @@ defineProps<Props>();
         </div>
       </section>
 
-      <div class="card-actions justify-end">
+      <section class="card-actions justify-end">
         <button type="button" class="btn btn-primary">Colaborar</button>
-      </div>
-    </section>
+      </section>
+    </div>
   </article>
 </template>

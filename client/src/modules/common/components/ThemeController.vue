@@ -20,7 +20,7 @@ const themeChangeHanlder = (event: Event) => {
 
 <template>
   <fieldset class="controller-container">
-    <legend class="sr-only">Select a display theme:</legend>
+    <legend class="sr-only">{{ $t('common.theme_controller.select') }}</legend>
     <span>
       <input
         :id="getSwitchId('system')"
@@ -29,10 +29,11 @@ const themeChangeHanlder = (event: Event) => {
         name="theme-radios"
         :checked="theme === 'system'"
         class="peer theme-switch"
+        :aria-label="$t('common.theme_controller.system')"
         @change="themeChangeHanlder($event)"
       />
       <label :for="getSwitchId('system')" class="theme-switch-label">
-        <span class="sr-only">system</span>
+        <span class="sr-only">{{ $t('common.theme_controller.system') }}</span>
         <system-icon aria-hidden="true" />
       </label>
     </span>
@@ -44,10 +45,11 @@ const themeChangeHanlder = (event: Event) => {
         name="theme-radios"
         :checked="theme === 'light'"
         class="peer theme-switch"
+        :aria-label="$t('common.theme_controller.light')"
         @change="themeChangeHanlder($event)"
       />
       <label :for="getSwitchId('light')" class="theme-switch-label">
-        <span class="sr-only">light</span>
+        <span class="sr-only">{{ $t('common.theme_controller.light') }}</span>
         <sun-icon aria-hidden="true" />
       </label>
     </span>
@@ -59,10 +61,11 @@ const themeChangeHanlder = (event: Event) => {
         name="theme-radios"
         :checked="theme === 'dark'"
         class="peer theme-switch"
+        :aria-label="$t('common.theme_controller.dark')"
         @change="themeChangeHanlder($event)"
       />
       <label :for="getSwitchId('dark')" class="theme-switch-label">
-        <span class="sr-only">dark</span>
+        <span class="sr-only">{{ $t('common.theme_controller.dark') }}</span>
         <moon-icon aria-hidden="true" />
       </label>
     </span>

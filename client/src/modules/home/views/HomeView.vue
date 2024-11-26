@@ -2,17 +2,19 @@
 import posts from '../../../data/posts.json';
 import PostCard from '@/modules/posts/components/PostCard.vue';
 import PostEntryBox from '@/modules/posts/components/PostEntryBox.vue';
+import PostModalCreate from '@/modules/posts/components/PostModalCreate.vue';
 </script>
 
 <template>
   <div class="px-3">
     <main class="max-w-xl mx-auto">
       <post-entry-box />
+      <post-modal-create />
 
       <div class="divider"></div>
 
       <div class="flex flex-col gap-4 pb-4">
-        <post-card v-for="post in posts" :key="post.id" :post="post" />
+        <post-card v-for="(post, index) in posts" :key="post.id" :post="post" :num="index + 1" />
       </div>
     </main>
   </div>
