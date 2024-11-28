@@ -6,29 +6,28 @@ namespace MarketplaceAPI.Models
     public class Publication
     {
         [Key]
-        public int IdPublication { get; set; } //PK
+        public int idPublication { get; set; } //PK
 
         [Required(ErrorMessage = "User ID is required.")]
-        public int IdUser { get; set; } // FK
+        public int idUser { get; set; } // FK
 
         [Required(ErrorMessage = "Title is required.")]
         [StringLength(50, ErrorMessage = "Title cannot exceed 50 characters.")]
-        public string Title { get; set; }
+        public string title { get; set; }
 
         [Required(ErrorMessage = "Description is required.")]
         [StringLength(100, ErrorMessage = "Description cannot exceed 100 characters.")]
-        public string Description { get; set; }
+        public string description { get; set; }
 
         [Required(ErrorMessage = "Publication date is required.")]
-        public DateTime PublicationDate { get; set; }
+        public DateTime publicationDate { get; set; }
 
         [StringLength(200, ErrorMessage = "Image URL cannot exceed 200 characters.")]
-        public string Image { get; set; }
+        public string image { get; set; }
 
+        [Required(ErrorMessage = "The state is required.")]
+        [StringLength(20, ErrorMessage = "The state must not exceed 20 characters.")]
+        public string state { get; set; }
 
-        //tablas relacionadas
-        
-        [ForeignKey("IdUser")]
-        public User User { get; set; }
     }
 }

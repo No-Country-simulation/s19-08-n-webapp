@@ -1,37 +1,44 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MarketplaceAPI.Models
 {
     public class Project
     {
         [Key]
-        public int IdProject { get; set; } // PK
+        public int idProject { get; set; } // PK
 
+        //-----------------------------
         [Required(ErrorMessage = "Publication ID is required.")]
-        public int IdPublication { get; set; } // FK
+        public int idPublication { get; set; } // FK
 
+        //-----------------------------
         [Required(ErrorMessage = "Requester User ID is required.")]
-        public int IdUserRequester { get; set; } // FK
+        public int idUserRequester { get; set; } // FK
 
-        [Required(ErrorMessage = "Collaborator User ID is required.")]
-        public int IdUserCollaborator { get; set; } // FK
+        //-----------------------------
+        [Required(ErrorMessage = "Name project is required.")]
+        public  string nameProject { get; set; }
+        //-----------------------------
 
+        [Required(ErrorMessage = "Description project is required.")]
+        public string description { get; set; }
+
+        //-----------------------------
         [Required(ErrorMessage = "Start date is required.")]
-        public DateTime StartDate { get; set; }
+        public DateTime startDate { get; set; }
 
-        public DateTime? EndDate { get; set; }
+        //-----------------------------
+        public DateTime? endDate { get; set; }
 
-        [Required(ErrorMessage = "Status is required.")]
-        [MaxLength(100, ErrorMessage = "Status cannot exceed 100 characters.")]
-        public string Status { get; set; }
+        //-----------------------------
+        [Required(ErrorMessage = "The state is required.")]
+        [MaxLength(100, ErrorMessage = "The state must not exceed 20 characters.")]
+        public string stateProject { get; set; }
 
-        
-        // class relacionadas
-        [ForeignKey("IdPublication")]
-        public Publication publication { get; set; } 
+   
 
-        public User user { get; set; }     
-        
+
     }
 }

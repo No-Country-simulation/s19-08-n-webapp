@@ -6,35 +6,24 @@ namespace MarketplaceAPI.Models
     public class Notification
     {
         [Key]
-        public int IdNotification { get; set; } // PK
+        public int idNotification { get; set; }
 
-        [Required(ErrorMessage = "Project ID is required.")]
-        public int IdProject { get; set; } // FK
+        [Required(ErrorMessage = "The project ID is required.")]
+        public int idProject { get; set; }
 
-        [Required(ErrorMessage = "Notification type is required.")]
-        [StringLength(50, ErrorMessage = "Notification type cannot exceed 50 characters.")]
-        public string NotificationType { get; set; }
+        [Required(ErrorMessage = "The notification type is required.")]
+        [StringLength(50, ErrorMessage = "The notification type must not exceed 50 characters.")]
+        public string type { get; set; }
 
-        [Required(ErrorMessage = "Description is required.")]
-        [StringLength(50, ErrorMessage = "Description cannot exceed 50 characters.")]
-        public string Description { get; set; }
+        [StringLength(150, ErrorMessage = "The description must not exceed 150 characters.")]
+        public string description { get; set; }
 
-        [Required(ErrorMessage = "Status is required.")]
-        [StringLength(20, ErrorMessage = "Status cannot exceed 20 characters.")]
-        public string Status { get; set; }
+        [Required(ErrorMessage = "The state is required.")]
+        [StringLength(20, ErrorMessage = "The state must not exceed 20 characters.")]
+        public string state { get; set; }
 
-        [StringLength(50, ErrorMessage = "Type notification cannot exceed 50 characters.")]
-        public string? TypeNotification { get; set; }
+        public int? idUserCollaborator { get; set; }
 
-        public int? IdUserCollaborator { get; set; } //FK
-
-
-        //tablas relacionadas
-
-        [ForeignKey("IdProject")]
-        public Project project { get; set; } 
-
-        [ForeignKey("IdUserCollaborator")]
-        public User user { get; set; }
+        
     }
 }
