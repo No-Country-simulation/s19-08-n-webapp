@@ -2,6 +2,7 @@
   "login": {},
   "register": {},
   "posts": {
+    "new": "Create a new post.",
     "btn_start": "Start a post",
     "card": {
       "btn_collab": "",
@@ -11,6 +12,9 @@
   },
   "common": {
     "navbar": {
+      "home": "Home",
+      "messaging": "Messaging",
+      "projects": "Projects",
       "search": "Search",
       "profile": "Profile",
       "settings": "Settings",
@@ -23,5 +27,11 @@
       "light": "light",
       "dark": "dark"
     }
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "account": "Account",
+    "notifications": "Notifications"
   }
 }

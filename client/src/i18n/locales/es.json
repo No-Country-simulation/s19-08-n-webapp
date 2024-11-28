@@ -2,6 +2,7 @@
   "login": {},
   "register": {},
   "posts": {
+    "new": "Crear una nueva publicación.",
     "btn_start": "Inicia una publicación",
     "card": {
       "btn_collab": "",
@@ -11,6 +12,9 @@
   },
   "common": {
     "navbar": {
+      "home": "Inicio",
+      "messaging": "Mensajería",
+      "projects": "Proyectos",
       "search": "Buscar",
       "profile": "Perfil",
       "settings": "Configuración",
@@ -23,5 +27,11 @@
       "light": "claro",
       "dark": "oscuro"
     }
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "account": "Account",
+    "notifications": "Notifications"
   }
 }
