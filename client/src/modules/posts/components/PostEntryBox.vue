@@ -1,12 +1,8 @@
-<script setup lang="ts">
-import { usePostsStore } from '../stores/posts.store';
-
-const postsStore = usePostsStore();
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <section class="card card-compact bg-base-100 shadow-lg mt-4">
-    <h2 class="sr-only">Crear una nueva publicación.</h2>
+    <h2 class="sr-only">{{ $t('posts.new') }}</h2>
     <div class="card-body flex-row">
       <div class="avatar">
         <div class="size-10 sm:size-12 rounded-full">
@@ -15,13 +11,13 @@ const postsStore = usePostsStore();
       </div>
       <button
         type="button"
-        @click="postsStore.isModalCreateOpen = true"
-        class="input input-bordered input-primary flex h-auto w-full rounded-full"
+        onclick="postModalCreate.showModal()"
+        class="input input-bordered input-primary flex h-auto w-full rounded-full hover:bg-base-200 focus:bg-base-200 transition-colors"
       >
         <span class="self-center">
-          <strong class="text-gray-400 font-normal text-sm sm:text-base"
-            >Inicia una publicación</strong
-          >
+          <strong class="text-gray-400 font-normal text-sm sm:text-base">
+            {{ $t('posts.btn_start') }}
+          </strong>
         </span>
       </button>
     </div>

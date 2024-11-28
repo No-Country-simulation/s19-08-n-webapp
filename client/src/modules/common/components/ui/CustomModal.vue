@@ -1,17 +1,12 @@
 <script setup lang="ts">
-interface Props {
-  open: boolean;
-}
-
-defineProps<Props>();
-
 defineEmits<{
   close: [void];
 }>();
 </script>
 
 <template>
-  <dialog class="modal" :aria-hidden="!open" :open="open" @close="$emit('close')">
+  <!-- <dialog class="modal" :aria-hidden="!open" :open="open" @close="$emit('close')"> -->
+  <dialog class="modal" @close="$emit('close')">
     <div class="modal-box">
       <form method="dialog">
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
