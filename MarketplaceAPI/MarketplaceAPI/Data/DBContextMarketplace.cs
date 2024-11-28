@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MarketplaceAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace MarketplaceAPI.Models
+namespace MarketplaceAPI.Data
 {
-    public class DBContextMarketplace: DbContext
+    public class DBContextMarketplace : DbContext
     {
-        public DBContextMarketplace(DbContextOptions<DBContextMarketplace> options) : base(options) 
+        public DBContextMarketplace(DbContextOptions<DBContextMarketplace> options) : base(options)
         {
-            
+
         }
 
         // DbSet para cada entidad
