@@ -1,5 +1,8 @@
 using MarketplaceAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using MarketplaceAPI.Services.Interfaces;
+using MarketplaceAPI.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +21,12 @@ builder.Services.AddDbContext<DBContextMarketplace>(
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IUserService, UserService>();
+
+
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

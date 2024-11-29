@@ -1,20 +1,19 @@
 ﻿using MarketplaceAPI.Data;
 using MarketplaceAPI.Models;
-using MarketplaceAPI.Repositorys.Interfaces;
+using MarketplaceAPI.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace MarketplaceAPI.Repositorys
+namespace MarketplaceAPI.Services
 {
-    public class UserRepository : IUserRepository
+    public class UserService : IUserService
     {
         private readonly DBContextMarketplace _DBContextMarketplace;
 
-        public UserRepository(DBContextMarketplace DBContextMarketplace)
+        public UserService(DBContextMarketplace DBContextMarketplace)
         {
             _DBContextMarketplace = DBContextMarketplace;
         }
-
         public async Task<List<User>> ListarUsuarios()
         {
             return await _DBContextMarketplace.Users.ToListAsync();
