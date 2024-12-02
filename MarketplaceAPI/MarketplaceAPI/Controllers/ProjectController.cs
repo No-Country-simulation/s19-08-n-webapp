@@ -1,5 +1,7 @@
 ﻿using MarketplaceAPI.Data;
 using MarketplaceAPI.Models;
+using MarketplaceAPI.Services;
+using MarketplaceAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,179 +11,120 @@ namespace MarketplaceAPI.Controllers
     [ApiController]
     [RequireHttps]
 
+    //falta FK
     public class ProjectController : ControllerBase {
 
+        private readonly IProjectService _projectService;
+
+        //delete
         private readonly DBContextMarketplace _context = null;
 
-        public ProjectController(DBContextMarketplace pContext) {
-            _context = pContext;
+        public ProjectController(IProjectService projectService) {
+            _projectService = projectService;
         }
 
         //--------------------------------------CRUD-Project--------------------------------------//
 
         //return the list of project
         [HttpGet("ListProject")]
-        public async Task<IActionResult> ListProject() {
-            try {
+        public async Task<ActionResult<List<Project>>> ListProject() {
+            var projects = await _projectService.ListaProyectos();
+            if (projects == null) 
+                throw new ArgumentException("La lista de proyectos está vacía");
+          
+            return Ok(projects);
 
-                var list = await _context.Projects.ToListAsync();
+        }//end 
 
-                if (list == null || !list.Any()) {
-                    return NotFound(new { message = "Projects Not Found" });
-                }
-
-                return Ok(list);
-
-            } catch (Exception ex) {
-                return StatusCode(500, new { message = "ERROR" });
-            }
+       
+        [HttpGet("GetProject/{id}")]
+        public async Task<ActionResult<Project>> GetProject(int id) {
+            var dataProject = await _projectService.GetProject(id);
+                
+            if (dataProject == null) 
+                return NotFound(new { message = $"Project with ID {id} not found" });
+            
+            return Ok(dataProject);
         }//end of method block
 
-        //--------------------------------------------------------------------------------//
-        //search for a proyect 
-        [HttpGet("SearchProject/{id}")]
-        public async Task<IActionResult> SearchProject(int id) {
-            try {
-                var data = await _context.Projects.FirstOrDefaultAsync(x => x.idProject == id);
-
-                if (data == null) {
-                    return NotFound(new { message = $"Project with ID {id} not found" });
-                }
-
-                return Ok(data);
-
-            } catch (Exception ex) {
-                return GetExceptions(ex, "An error occurred while running the project.");
-            }
-        }//end of method block
-
-        //--------------------------------------------------------------------------------//
-        //delete for project
+       
         [HttpDelete("DeleteProject/{id}")]
-        public async Task<IActionResult> DeleteProject(int id) {
-            try {
-                var data = await _context.Projects.FirstOrDefaultAsync(x => x.idProject == id);
+        public async Task<ActionResult> DeleteProject(int id) {
+            var dataProject = await _projectService.GetProject(id);
 
-                if (data == null) {
-                    return NotFound(new { message = $"The project ID {id} was not found." });
-                }
+            if (dataProject == null) 
+                return NotFound(new { message = $"The project ID {id} was not found." });
 
-                _context.Projects.Remove(data);
-                await _context.SaveChangesAsync();
-                return Ok(new { message = $"Project {data.nameProject} succes" });
-
-            } catch (Exception ex) {
-                return GetExceptions(ex, "An error occurred while running the project.");
-            }
+            await _projectService.EliminarProject(id);
+            return Ok("Project Delete");    
+           
         }//end of method delete
+        
 
-
-        //--------------------------------------------------------------------------------//
-        //Add project
         [HttpPost("AddProject")]
-        public async Task<IActionResult> AddProject(Project project) {
-            try {
-                var data = await _context.Projects.FindAsync(project.idProject);
+        public async Task<ActionResult<Project>> AddProject(Project addProject, int idProject) {
+            var dataProject = await _projectService.GetProject(addProject.idProject);
 
-                if (data != null) {
-                    return NotFound(new { message = $"The project is already registered" });
-                }
-                _context.Projects.Add(project);
-                await _context.SaveChangesAsync();
-                return Ok(new { idProject = project.idProject, message = $"Project ID {project.idProject} name {project.nameProject} added successfully!" });
+            if (dataProject != null)
+                return BadRequest($"The project is already registered");
 
-            } catch (Exception ex) {
-                return GetExceptions(ex, "An error occurred while running the project.");
-            }
-        }//end method
+            await _projectService.AgregarProject(addProject);
+            return Ok(new {idProject = addProject.idProject, message = $"Project ID {idProject} name {addProject.nameProject} added successfully!" });
 
-        //--------------------------------------------------------------------------------//
-        //chage project
-        [HttpPost("ChangeProject")]
-        public async Task<IActionResult> ChangeProject(Project project)
-        {
-            try {
-                //project exists?
-                var data = await _context.Projects.FindAsync(project.idProject);
+        }//end method add
 
-                if (data == null) {
-                    return NotFound(new { message = $"The project ID was not found." });
-                }
 
-                // validate that the 'idUserRequester' cannot be manipulated
-                if (project.idUserRequester != 0 && project.idUserRequester != data.idUserRequester) {
-                    return BadRequest(new {
-                        message = "The 'idUserRequester' field cannot be modified."
-                    });
-                }
+        [HttpPost("UpdateProject")]
+        public async Task<ActionResult> UpdateProject(Project project, int idProject) {
+            var dataProject = await _projectService.GetProject(idProject);
 
-                //validate that the 'idPublication' cannot be manipulated
-                if (project.idPublication != 0 && project.idPublication != data.idPublication) {
-                    return BadRequest(new {
-                        message = "The 'idPublication' field cannot be modified."
-                    });
-                }
+            if (dataProject == null)
+                return NotFound(new { message = $"The project ID was not found." });
 
-                //assign the values ​​of the BD
-                project.idUserRequester = data.idUserRequester;
-                project.idPublication = data.idPublication;
+            if (project.idUserRequester != 0 && project.idUserRequester != dataProject.idUserRequester)
+                return BadRequest(new { message = "The 'idUserRequester' field cannot be modified." });
 
-                //Update Data
-                data.nameProject = project.nameProject;
-                data.description = project.description;
-                data.startDate = project.startDate;
-                data.endDate = project.endDate;
-                data.stateProject = project.stateProject;
+            if (project.idPublication != 0 && project.idPublication != dataProject.idPublication)
+                return BadRequest(new { message = "The 'idPublication' field cannot be modified." });
 
-                //Save changes
-                await _context.SaveChangesAsync();
+            //Update Data
+            dataProject.nameProject = project.nameProject;
+            dataProject.description = project.description;
+            dataProject.startDate = project.startDate;
+            dataProject.endDate = project.endDate;
+            dataProject.stateProject = project.stateProject;
 
-                return Ok(new {
-                    idProject = project.idProject,
-                    message = $"Project ID {project.idProject} name {project.nameProject} changed successfully..."
-                });
-            }
-            catch (Exception ex)
-            {
-                return GetExceptions(ex, "An error occurred while running the project.");
-            }
-        }
+            await _projectService.ActualizarProject(dataProject);
+
+            return Ok($"Project ID {idProject} name {project.nameProject} update successfully...");
+
+        }//end methot
+
+
+
         //--------------------------------------END-CRUD-PROJECT--------------------------------------//
 
-        //EXTRA METHODS
-        //--------------------------------------------------------------------------------//
-        //search for a proyect 
         [HttpGet("ListColaborator")]
         public async Task<IActionResult> ListColaborator() {
-            try {
-                var list = await _context.ProjectContributors.ToListAsync();
+            var list = await _projectService.ListarColaboradores();
+            if (list == null || !list.Any())
+                return NotFound(new { message = "Projects Not Found" });
 
-                if (list == null || !list.Any()) {
-                    return NotFound(new { message = "Projects Not Found" });
-                }
-                return Ok(list);
-            } catch (Exception ex) {
-                return StatusCode(500, new { message = "ERROR" });
-            }
-        }//end of method block
+            return Ok(list);
+        }//end of method
 
-        //---------------------------------------------------------------------------------------------------
+
+        
         //search for collaborator in the project collaborator table
-        [HttpGet("SearchUserColaborator/{id}")]
-        public async Task<IActionResult> SearchUserColaborator(int id) {
-            try {
-                var data = await _context.ProjectContributors.FirstOrDefaultAsync(x => x.idUserContributor == id);
+        [HttpGet("getProjectColaborator/{id}")]
+        public async Task<IActionResult> getProjectColaborator(int id) {
+            var dataColaborator = await _projectService.obtenerColaborador(id);
 
-                //collaborator exist?
-                if (data == null) {
-                    return NotFound(new { message = $"The user ID {id} not registered in the Project" });
-                }
-                return Ok(data);
+            if (dataColaborator == null)
+                return NotFound(new { message = $"The user ID {id} not registered in the Project" });
 
-            } catch (Exception ex) {
-                return GetExceptions(ex, "An error occurred while running the project.");
-            }//end
-        }//end of method block
+            return Ok(dataColaborator);
+        }//end of method
 
         //---------------------------------------------------------------------------------------------------
 
