@@ -1,18 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import LangController from '@/modules/common/components/LangController.vue';
+</script>
 
 <template>
   <div class="">
     <section class="rounded-box bg-base-200 p-4">
-      <h2 class="sr-only">section for language selector</h2>
+      <h2 class="sr-only">{{ $t('settings.lang.title') }}</h2>
       <div class="flex items-center justify-between gap-2">
         <div>
-          <div class="text-xl font-semibold">Language</div>
-          <p class="text-sm text-gray-500">Select the language you use on FreeConnect</p>
+          <div class="text-xl font-semibold">{{ $t('settings.lang.lang') }}</div>
+          <p class="text-sm text-gray-500">
+            {{ $t('settings.lang.help_text', { companyName: 'FreeConnect' }) }}
+          </p>
         </div>
-        <select class="select select-primary">
-          <option>English</option>
-          <option>Spanish</option>
-        </select>
+        <lang-controller />
       </div>
     </section>
   </div>
