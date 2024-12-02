@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import {
+  BellIcon,
+  LogOutIcon,
+  SearchIcon,
+  SettingsIcon,
+  CircleUserRoundIcon,
+} from 'lucide-vue-next';
+
 import NavMenu from './NavMenu.vue';
 import MenuIcon from '../icons/MenuIcon.vue';
-import GearIcon from '../icons/GearIcon.vue';
-import BellIcon from '../icons/BellIcon.vue';
-import LogOutIcon from '../icons/LogOutIcon.vue';
-import SearchIcon from '../icons/SearchIcon.vue';
-import ProfileIcon from '../icons/ProfileIcon.vue';
 import ThemeController from './ThemeController.vue';
 
 interface Props {
@@ -43,7 +46,7 @@ withDefaults(defineProps<Props>(), { search: false, navLinks: false });
           class="input input-sm md:input-md input-primary input-bordered flex items-center gap-2 bg-base-200"
         >
           <input type="search" class="w-full" :placeholder="$t('common.navbar.search')" />
-          <search-icon class="size-4 opacity-70" />
+          <search-icon :size="16" class="opacity-70" />
         </label>
       </div>
       <div>
@@ -53,7 +56,7 @@ withDefaults(defineProps<Props>(), { search: false, navLinks: false });
       </div>
       <div class="dropdown dropdown-end flex md:inline-block">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle btn-sm md:btn-md avatar">
-          <div class="size-10 rounded-full">
+          <div class="rounded-full">
             <img
               alt="Tailwind CSS Navbar component"
               src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
@@ -73,19 +76,19 @@ withDefaults(defineProps<Props>(), { search: false, navLinks: false });
           <li>
             <router-link to="/profile/juan" class="justify-between">
               {{ $t('common.navbar.profile') }}
-              <profile-icon class="size-4" aria-hidden="true" />
+              <circle-user-round-icon :size="16" aria-hidden="true" />
             </router-link>
           </li>
           <li>
             <router-link to="/settings" class="justify-between">
               {{ $t('common.navbar.settings') }}
-              <gear-icon class="size-4" aria-hidden="true" />
+              <settings-icon :size="16" aria-hidden="true" />
             </router-link>
           </li>
           <li>
             <button type="button" class="justify-between">
               <span>{{ $t('common.navbar.logout') }}</span>
-              <log-out-icon class="size-4" aria-hidden="true" />
+              <log-out-icon :size="16" aria-hidden="true" />
             </button>
           </li>
         </ul>
