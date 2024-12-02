@@ -197,8 +197,8 @@ namespace MarketplaceAPI.Controllers
 
                 //get collaborator name from user table
                 var collaboratorName = await _context.Users
-                    .Where(u => u.idUser == idCollaborator)
-                    .Select(u => u.name)
+                    .Where(u => u.IdUser == idCollaborator)
+                    .Select(u => u.FirstName)
                     .FirstOrDefaultAsync();
 
                 //collaborator exist?
@@ -344,13 +344,13 @@ namespace MarketplaceAPI.Controllers
 
                 //select to extract the user name 
                 var users = await _context.Users
-                    .Where(u => u.idUser == idUserEvaluator || u.idUser == idUserEvaluted)
-                    .Select(u => new { u.idUser, u.name })
+                    .Where(u => u.IdUser == idUserEvaluator || u.IdUser == idUserEvaluted)
+                    .Select(u => new { u.IdUser, u.FirstName })
                     .ToListAsync();
 
 
-                var evaluatorName = users.FirstOrDefault(u => u.idUser == idUserEvaluator)?.name;
-                var evaluatedName = users.FirstOrDefault(u => u.idUser == idUserEvaluted)?.name;
+                var evaluatorName = users.FirstOrDefault(u => u.IdUser == idUserEvaluator)?.FirstName;
+                var evaluatedName = users.FirstOrDefault(u => u.IdUser == idUserEvaluted)?.FirstName;
 
                 //users not exists
                 if (string.IsNullOrEmpty(evaluatorName)){

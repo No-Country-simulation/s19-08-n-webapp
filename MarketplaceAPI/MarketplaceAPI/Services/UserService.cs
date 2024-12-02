@@ -21,12 +21,12 @@ namespace MarketplaceAPI.Services
 
         public async Task<User> ObtenerUsuario(int idUsuario)
         {
-            return await _DBContextMarketplace.Users.Where(x => x.idUser == idUsuario).FirstOrDefaultAsync();
+            return await _DBContextMarketplace.Users.Where(x => x.IdUser == idUsuario).FirstOrDefaultAsync();
         }
 
         public async Task<User> ObtenerUsuarioConEmail(string correoElectronico)
         {
-            return await _DBContextMarketplace.Users.Where(x => x.email == correoElectronico).FirstOrDefaultAsync();
+            return await _DBContextMarketplace.Users.Where(x => x.Email == correoElectronico).FirstOrDefaultAsync();
         }
 
         public async Task<User> ActualizarUsuario(User usuario)

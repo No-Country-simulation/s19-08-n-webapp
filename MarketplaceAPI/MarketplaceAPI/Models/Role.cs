@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MarketplaceAPI.Models
 {
+    [NotMapped]
     public class Role
     {
         [Key]

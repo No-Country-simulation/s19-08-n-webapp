@@ -41,10 +41,6 @@ namespace MarketplaceAPI.Migrations
 
                     b.HasKey("idChat");
 
-                    b.HasIndex("idProject");
-
-                    b.HasIndex("idUser");
-
                     b.ToTable("Chats");
                 });
 
@@ -82,12 +78,6 @@ namespace MarketplaceAPI.Migrations
 
                     b.HasKey("idEvaluation");
 
-                    b.HasIndex("idEvaluatedUser");
-
-                    b.HasIndex("idEvaluatorUser");
-
-                    b.HasIndex("idProject");
-
                     b.ToTable("Evaluations");
                 });
 
@@ -122,8 +112,6 @@ namespace MarketplaceAPI.Migrations
 
                     b.HasKey("idMessage");
 
-                    b.HasIndex("idChat");
-
                     b.ToTable("Messages");
                 });
 
@@ -157,10 +145,6 @@ namespace MarketplaceAPI.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("idNotification");
-
-                    b.HasIndex("idProject");
-
-                    b.HasIndex("idUserCollaborator");
 
                     b.ToTable("Notifications");
                 });
@@ -200,23 +184,29 @@ namespace MarketplaceAPI.Migrations
 
                     b.HasKey("idProject");
 
-                    b.HasIndex("idPublication");
-
-                    b.HasIndex("idUserRequester");
-
                     b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("MarketplaceAPI.Models.ProjectContributor", b =>
                 {
                     b.Property<int>("idProject")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("idUserContributor")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idProject"));
+
+                    b.Property<string>("ApplicantId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ProjectidProject")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("applicationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("idUserContributor")
+                        .HasColumnType("int");
 
                     b.Property<string>("nameContributor")
                         .IsRequired()
@@ -227,9 +217,11 @@ namespace MarketplaceAPI.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("idProject", "idUserContributor");
+                    b.HasKey("idProject");
 
-                    b.HasIndex("idUserContributor");
+                    b.HasIndex("ApplicantId");
+
+                    b.HasIndex("ProjectidProject");
 
                     b.ToTable("ProjectContributors");
                 });
@@ -270,172 +262,231 @@ namespace MarketplaceAPI.Migrations
 
                     b.HasKey("idPublication");
 
-                    b.HasIndex("idUser");
-
                     b.ToTable("Publications");
-                });
-
-            modelBuilder.Entity("MarketplaceAPI.Models.Role", b =>
-                {
-                    b.Property<int>("idRole")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idRole"));
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("idRole");
-
-                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("MarketplaceAPI.Models.User", b =>
                 {
-                    b.Property<int>("idUser")
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idUser"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("country")
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.HasKey("Id");
 
-                    b.Property<int>("idRole")
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("image")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("lastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.HasKey("Id");
 
-                    b.Property<string>("linkedIn")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                    b.HasIndex("UserId");
 
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("portfolio")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("idUser");
-
-                    b.HasIndex("idRole");
-
-                    b.ToTable("Users");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("MarketplaceAPI.Models.Chat", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("MarketplaceAPI.Models.Project", null)
-                        .WithMany()
-                        .HasForeignKey("idProject")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasOne("MarketplaceAPI.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("idUser")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("MarketplaceAPI.Models.Evaluation", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("MarketplaceAPI.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("idEvaluatedUser")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasOne("MarketplaceAPI.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("idEvaluatorUser")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasOne("MarketplaceAPI.Models.Project", null)
-                        .WithMany()
-                        .HasForeignKey("idProject")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("MarketplaceAPI.Models.Message", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("MarketplaceAPI.Models.Chat", null)
-                        .WithMany()
-                        .HasForeignKey("idChat")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
-            modelBuilder.Entity("MarketplaceAPI.Models.Notification", b =>
-                {
-                    b.HasOne("MarketplaceAPI.Models.Project", null)
-                        .WithMany()
-                        .HasForeignKey("idProject")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasOne("MarketplaceAPI.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("idUserCollaborator")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
 
-            modelBuilder.Entity("MarketplaceAPI.Models.Project", b =>
-                {
-                    b.HasOne("MarketplaceAPI.Models.Publication", null)
-                        .WithMany()
-                        .HasForeignKey("idPublication")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasOne("MarketplaceAPI.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("idUserRequester")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("MarketplaceAPI.Models.ProjectContributor", b =>
                 {
-                    b.HasOne("MarketplaceAPI.Models.Project", "Project")
+                    b.HasOne("MarketplaceAPI.Models.User", "Applicant")
                         .WithMany()
-                        .HasForeignKey("idProject")
+                        .HasForeignKey("ApplicantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MarketplaceAPI.Models.User", "Applicant")
-                        .WithMany("ProjectApplications")
-                        .HasForeignKey("idUserContributor")
+                    b.HasOne("MarketplaceAPI.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectidProject")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -444,27 +495,55 @@ namespace MarketplaceAPI.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("MarketplaceAPI.Models.Publication", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("MarketplaceAPI.Models.User", null)
                         .WithMany()
-                        .HasForeignKey("idUser")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MarketplaceAPI.Models.User", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("MarketplaceAPI.Models.Role", null)
+                    b.HasOne("MarketplaceAPI.Models.User", null)
                         .WithMany()
-                        .HasForeignKey("idRole")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MarketplaceAPI.Models.User", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Navigation("ProjectApplications");
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MarketplaceAPI.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("MarketplaceAPI.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

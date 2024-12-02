@@ -5,6 +5,7 @@ namespace MarketplaceAPI.Models
 {
     public class ProjectContributor
     {
+        [Key]
         [Required(ErrorMessage = "Project ID is required.")]
         public int idProject { get; set; }
 

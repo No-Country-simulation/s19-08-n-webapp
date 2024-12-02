@@ -1,44 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace MarketplaceAPI.Models
 {
-    public class User
+    public class User : IdentityUser
     {
+
         [Key]
-        public int idUser { get; set; }
+        public int IdUser { get; set; } // PK
 
-        [Required(ErrorMessage = "The name is required.")]
-        [StringLength(50, ErrorMessage = "The name must not exceed 50 characters.")]
-        public string name { get; set; }
+        [Required(ErrorMessage = "First name is required.")]
+        [StringLength(50, ErrorMessage = "First name cannot exceed 50 characters.")]
+        public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "The last name is required.")]
-        [StringLength(50, ErrorMessage = "The last name must not exceed 50 characters.")]
-        public string lastName { get; set; }
+        [Required(ErrorMessage = "Last name is required.")]
+        [StringLength(50, ErrorMessage = "Last name cannot exceed 50 characters.")]
+        public string LastName { get; set; }
 
-        [Required(ErrorMessage = "The email is required.")]
-        [StringLength(100, ErrorMessage = "The email must not exceed 100 characters.")]
-        [EmailAddress(ErrorMessage = "Invalid email format.")]
-        public string email { get; set; }
-
-        [Required(ErrorMessage = "The country is required.")]
-        [StringLength(50, ErrorMessage = "The country must not exceed 50 characters.")]
-        public string country { get; set; }
-
-        [StringLength(200, ErrorMessage = "The LinkedIn URL must not exceed 200 characters.")]
-        public string linkedIn { get; set; }
-
-        
-        [StringLength(200, ErrorMessage = "The portfolio URL must not exceed 200 characters.")]
-        public string portfolio { get; set; }
-
-        [StringLength(100, ErrorMessage = "The image URL must not exceed 100 characters.")]
-        public string image { get; set; }
-
-        [Required(ErrorMessage = "The role is required.")]
-        public int idRole { get; set; }
-
-        public ICollection<ProjectContributor> ProjectApplications { get; set; } // List of project applications
 
     }
-
 }

@@ -47,7 +47,7 @@ namespace MarketplaceAPI.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult<User>> UpdateUser(int id, [FromBody] User updatedUser)
         {
-            if (id != updatedUser.idUser)
+            if (id != updatedUser.IdUser)
                 return BadRequest("User ID mismatch.");
 
             var user = await _userService.ObtenerUsuario(id);
