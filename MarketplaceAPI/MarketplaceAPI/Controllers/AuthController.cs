@@ -78,9 +78,9 @@ namespace MarketplaceAPI.Controllers
             // Crear los claims del token
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim("Id", user.Id.ToString()),
+                new Claim("UserName", user.UserName),
+                new Claim("Email", user.Email),
                 new Claim("FullName", $"{user.FirstName} {user.LastName}")
             };
 
