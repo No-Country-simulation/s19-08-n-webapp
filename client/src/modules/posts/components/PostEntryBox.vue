@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import PostModalCreate from './PostModalCreate.vue';
+</script>
 
 <template>
   <section class="card card-compact bg-base-100 shadow-lg mt-4">
@@ -9,17 +11,15 @@
           <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
         </div>
       </div>
-      <button
-        type="button"
-        onclick="postModalCreate.showModal()"
-        class="input input-bordered input-primary flex h-auto w-full rounded-full hover:bg-base-200 focus:bg-base-200 transition-colors"
+      <post-modal-create
+        btn-class="input input-bordered input-primary flex h-auto w-full rounded-full hover:bg-base-200 focus:bg-base-200 transition-colors"
       >
         <span class="self-center">
           <strong class="text-gray-400 font-normal text-sm sm:text-base">
             {{ $t('posts.btn_start') }}
           </strong>
         </span>
-      </button>
+      </post-modal-create>
     </div>
   </section>
 </template>
