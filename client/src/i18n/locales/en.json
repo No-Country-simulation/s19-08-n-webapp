@@ -26,12 +26,27 @@
       "system": "system",
       "light": "light",
       "dark": "dark"
+    },
+    "lang_controller": {
+      "en": "English",
+      "es": "Spanish"
+    },
+    "not_found": {
+      "title": "Oops! Page not found",
+      "subtitle": "The page you're looking for doesn't exist or has been moved.",
+      "btn_home": "Go Home",
+      "btn_refresh": "Refresh"
     }
   },
   "settings": {
     "title": "Settings",
     "general": "General",
     "account": "Account",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "lang": {
+      "title": "section for language selector",
+      "lang": "Language",
+      "help_text": "Select the language you use on {companyName}"
+    }
   }
 }

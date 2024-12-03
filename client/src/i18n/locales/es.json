@@ -26,12 +26,27 @@
       "system": "sistema",
       "light": "claro",
       "dark": "oscuro"
+    },
+    "lang_controller": {
+      "en": "Inglés",
+      "es": "Español"
+    },
+    "not_found": {
+      "title": "¡Ups! Página no encontrada",
+      "subtitle": "La página que buscas no existe o ha sido movida.",
+      "btn_home": "Ir al Inicio",
+      "btn_refresh": "Recargar"
     }
   },
   "settings": {
-    "title": "Settings",
+    "title": "Configuración",
     "general": "General",
-    "account": "Account",
-    "notifications": "Notifications"
+    "account": "Cuenta",
+    "notifications": "Notificaciones",
+    "lang": {
+      "title": "sección para el selector de idioma",
+      "lang": "Idioma",
+      "help_text": "Seleccione el idioma que utiliza en {companyName}"
+    }
   }
 }
