@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MarketplaceAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class IAGdd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -119,6 +119,23 @@ namespace MarketplaceAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Notifications", x => x.idNotification);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectContributors",
+                columns: table => new
+                {
+                    idProjectContributor = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    idProject = table.Column<int>(type: "int", nullable: false),
+                    idUserContributor = table.Column<int>(type: "int", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    applicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectContributors", x => x.idProjectContributor);
                 });
 
             migrationBuilder.CreateTable(
@@ -264,36 +281,6 @@ namespace MarketplaceAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ProjectContributors",
-                columns: table => new
-                {
-                    idProject = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    idUserContributor = table.Column<int>(type: "int", nullable: false),
-                    nameContributor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    applicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    ProjectidProject = table.Column<int>(type: "int", nullable: false),
-                    ApplicantId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProjectContributors", x => x.idProject);
-                    table.ForeignKey(
-                        name: "FK_ProjectContributors_AspNetUsers_ApplicantId",
-                        column: x => x.ApplicantId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProjectContributors_Projects_ProjectidProject",
-                        column: x => x.ProjectidProject,
-                        principalTable: "Projects",
-                        principalColumn: "idProject",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -332,16 +319,6 @@ namespace MarketplaceAPI.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProjectContributors_ApplicantId",
-                table: "ProjectContributors",
-                column: "ApplicantId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProjectContributors_ProjectidProject",
-                table: "ProjectContributors",
-                column: "ProjectidProject");
         }
 
         /// <inheritdoc />
@@ -378,6 +355,9 @@ namespace MarketplaceAPI.Migrations
                 name: "ProjectContributors");
 
             migrationBuilder.DropTable(
+                name: "Projects");
+
+            migrationBuilder.DropTable(
                 name: "Publications");
 
             migrationBuilder.DropTable(
@@ -385,9 +365,6 @@ namespace MarketplaceAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Projects");
         }
     }
 }

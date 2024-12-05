@@ -9,9 +9,13 @@ namespace MarketplaceAPI.Services.Interfaces
         Task<Project> GetProject(int idProject);
         Task<Project> AgregarProject(Project project);
         Task EliminarProject(int idProject);
-        Task<Project> ActualizarProject(Project project);
+        Task<Project> ActualizarProject(int idProject, Project project);
         Task<List<ProjectContributor>> ListarColaboradores();
-        Task<List<ProjectContributor>> obtenerColaborador(int idProjectColaborador);
+        Task<List<ProjectContributor>> obtenerListProjecColaborador(int idUserContributor);
+
+        Task<string> AgregarColaborador(int idProject, int idCollaborator);
+        Task<List<Evaluation>> ListaEvaluacion();
+
 
     }//end 
 }//end
