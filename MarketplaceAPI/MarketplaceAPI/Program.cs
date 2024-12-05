@@ -50,7 +50,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserService, UserService>();
-
+builder.Services.AddScoped<IPublicationService, PublicationService>();
 
 var app = builder.Build();
 
