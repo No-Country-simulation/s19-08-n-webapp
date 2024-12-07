@@ -11,8 +11,7 @@ namespace MarketplaceAPI.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [RequireHttps]
-
+    
     //falta FK
     public class ProjectController : ControllerBase {
 
