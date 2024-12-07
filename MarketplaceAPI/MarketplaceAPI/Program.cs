@@ -49,6 +49,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IPublicationService, PublicationService>();
+
 builder.Services.AddScoped<IProjectService, ProjectService>();
 
 // Agregar servicios de CORS
@@ -61,10 +64,11 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+// Respaldo-Back
 
 var app = builder.Build();
 
-// Aplicar la política de CORS
+// Aplicar la polÃ­tica de CORS
 app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
