@@ -52,10 +52,10 @@ export default defineComponent({
       }
 
       try {
-        console.log('Datos del formulario:', form); // Muestra los datos enviados
-        await authStore.loginAction(form); // Llama a la acción del store
+        console.log('Datos del formulario:', form);
+        await authStore.loginAction(form);
         console.log('Login exitoso');
-        // Redirigir a la página principal o dashboard
+
       } catch (err: any) {
         error.value = err.response?.data?.message || 'Credenciales incorrectas o error del servidor';
         console.error('Error en el login:', err);
