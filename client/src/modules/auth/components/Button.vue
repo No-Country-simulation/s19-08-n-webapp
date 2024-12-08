@@ -1,12 +1,12 @@
 <template>
     <div>
-        <button :type="type">
+        <button :type="type" class="btn">
             {{ label }}
         </button>
     </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
     name: 'Button',
     props: {
@@ -18,9 +18,8 @@ export default {
             type: String,
             default: 'Click me',
         },
-
     },
 };
 </script>
 
-<style></style>
+<style scoped></style>

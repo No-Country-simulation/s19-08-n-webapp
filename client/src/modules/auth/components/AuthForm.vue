@@ -3,12 +3,13 @@
         <label :for="inputId" class="block text-sm font-medium text-gray-700 text-left">
             {{ placeholder }}
         </label>
-        <input :id="inputId" :type="type" :placeholder="placeholder"
-            class="input input-bordered input-info w-full max-w-xs" />
+        <input :id="inputId" :type="type" :placeholder="placeholder" :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
+            class="input input-bordered input-info w-full max-w-xs bg-white" />
     </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
     name: 'Input',
     props: {
@@ -19,6 +20,10 @@ export default {
         placeholder: {
             type: String,
             default: '',
+        },
+        modelValue: {
+            type: String,
+            required: true,
         },
         inputId: {
             type: String,

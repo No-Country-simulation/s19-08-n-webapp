@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import Button from '@/modules/home/components/Button.vue';
-import Input from '../../home/components/AuthForm.vue';
+import Button from '@/modules/auth/components/Button.vue';
+import Input from '../components/AuthForm.vue';
 
 
 export default {
