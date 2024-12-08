@@ -1,5 +1,5 @@
 <template>
-  <div class="card bg-white w-96 shadow-xl">
+  <div class="card bg-white w-96 shadow-xl ">
     <figure class="px-10 pt-10">
       <img src="@/assets/logo.png" alt="Imagen de login" />
     </figure>
