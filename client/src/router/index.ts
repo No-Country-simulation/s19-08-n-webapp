@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import { authRoutes } from '@/modules/auth/routes';
 import { settingRoutes } from '@/modules/settings/router';
-import RootLayout from '@/modules/common/layouts/RootLayout.vue';
+import MainLayout from '@/modules/common/layouts/MainLayout.vue';
 import NotFoundView from '@/modules/common/views/NotFoundView.vue';
 
 const router = createRouter({
@@ -10,9 +10,9 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'root',
+      name: 'main',
       redirect: { name: 'home' },
-      component: RootLayout,
+      component: MainLayout,
       children: [
         {
           path: 'home',
