@@ -68,40 +68,97 @@ namespace MarketplaceAPI.Controllers
                 return Unauthorized("Invalid login attempt.");
             }
 
-            // Obtener el usuario
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null)
             {
                 return Unauthorized("Invalid login attempt.");
             }
 
-            // Crear los claims del token
+            var tokenString = GenerateJwtToken(user);
+
+            return Ok(new
+            {
+                Token = tokenString,
+                User = new
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    FullName = $"{user.FirstName} {user.LastName}"
+                }
+            });
+        }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] RefreshTokenDto model)
+        {
+            if (string.IsNullOrEmpty(model.Token))
+            {
+                return BadRequest("Token is missing.");
+            }
+
+            var handler = new JwtSecurityTokenHandler();
+
+            try
+            {
+                // Validar el token existente
+                var token = handler.ReadJwtToken(model.Token);
+                var userIdClaim = token.Claims.FirstOrDefault(c => c.Type == "Id");
+                if (userIdClaim == null)
+                {
+                    return Unauthorized("Invalid token.");
+                }
+
+                // Buscar al usuario por el claim "Id"
+                var user = await _userManager.FindByIdAsync(userIdClaim.Value);
+                if (user == null)
+                {
+                    return Unauthorized("User not found.");
+                }
+
+                // Generar un nuevo token
+                var newTokenString = GenerateJwtToken(user);
+
+                return Ok(new
+                {
+                    Token = newTokenString,
+                    User = new
+                    {
+                        Id = user.Id,
+                        UserName = user.UserName,
+                        Email = user.Email,
+                        FullName = $"{user.FirstName} {user.LastName}"
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized("Invalid token.");
+            }
+        }
+
+        private string GenerateJwtToken(User user)
+        {
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim("Id", user.Id.ToString()),
+                new Claim("UserName", user.UserName),
+                new Claim("Email", user.Email),
                 new Claim("FullName", $"{user.FirstName} {user.LastName}")
             };
 
-            // Obtener la clave secreta desde la configuración (igual a la que usas para validar el JWT)
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            // Generar el token
             var token = new JwtSecurityToken(
                 issuer: _configuration["JwtSettings:Issuer"],
                 audience: _configuration["JwtSettings:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddHours(1),  // El token expirará en 1 hora
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: creds
             );
 
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-
-            // Devolver el token en la respuesta
-            return Ok(new { Token = tokenString });
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
-
 }
