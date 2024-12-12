@@ -9,6 +9,7 @@ import Toast, { POSITION } from 'vue-toastification';
 import App from './App.vue';
 import router from './router';
 import i18n from './i18n';
+import './config/yup.config';
 
 const app = createApp(App);
 
