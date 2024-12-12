@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "title": "Desarrollo de landing pages a cambio de contenido SEO",
+    "description": "Ofrezco crear landing pages modernas y optimizadas para velocidad. Estoy buscando ayuda para mejorar su posicionamiento en motores de búsqueda.",
+    "skills_offered": ["HTML", "CSS", "JavaScript", "Bootstrap"],
+    "skills_requested": ["SEO", "Redacción persuasiva", "Estrategias de backlinks"],
+    "author": {
+      "name": "Ana Martínez",
+      "profile_img": "",
+      "headline": "Frontend Specialist"
+    },
+    "published_date": "2024-12-02",
+    "status": "active",
+    "images": ["https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg"]
+  },
+  {
+    "id": 2,
+    "title": "Creación de componentes React a cambio de diseño UX/UI",
+    "description": "Puedo desarrollar componentes reutilizables en React para tus aplicaciones. Me interesa trabajar con un diseñador que mejore la experiencia de usuario.",
+    "skills_offered": ["React", "JavaScript", "CSS Modules"],
+    "skills_requested": ["Diseño UX", "UI Design", "Figma"],
+    "author": {
+      "name": "Ana Martínez",
+      "profile_img": "",
+      "headline": "Frontend Specialist"
+    },
+    "published_date": "2024-12-04",
+    "status": "active",
+    "images": ["https://images.pexels.com/photos/574077/pexels-photo-574077.jpeg"]
+  },
+  {
+    "id": 3,
+    "title": "Integración de APIs REST a cambio de ayuda con copywriting",
+    "description": "Ofrezco integrar APIs REST en tus proyectos frontend. Busco alguien que me ayude con textos atractives para mi portafolio.",
+    "skills_offered": ["JavaScript", "Axios", "API Fetch"],
+    "skills_requested": ["Copywriting", "Escritura persuasiva", "Contenido para portafolios"],
+    "author": {
+      "name": "Ana Martínez",
+      "profile_img": "",
+      "headline": "Frontend Specialist"
+    },
+    "published_date": "2024-12-06",
+    "status": "active",
+    "images": ["https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg"]
+  },
+  {
+    "id": 4,
+    "title": "Optimización de rendimiento frontend a cambio de ilustraciones",
+    "description": "Puedo mejorar el rendimiento de tus aplicaciones frontend optimizando código y recursos. Estoy interesada en colaborar con un ilustrador para crear gráficos personalizados.",
+    "skills_offered": ["Optimización de rendimiento", "Lazy Loading", "Minificación de recursos"],
+    "skills_requested": ["Ilustración digital", "Adobe Illustrator", "Gráficos personalizados"],
+    "author": {
+      "name": "Ana Martínez",
+      "profile_img": "",
+      "headline": "Frontend Specialist"
+    },
+    "published_date": "2024-12-08",
+    "status": "active",
+    "images": ["https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg"]
+  },
+  {
+    "id": 5,
+    "title": "Auditoría de accesibilidad web a cambio de mentorías en inglés técnico",
+    "description": "Reviso y mejoro la accesibilidad de tus sitios web para cumplir estándares como WCAG. Necesito mentoría para perfeccionar mi inglés técnico.",
+    "skills_offered": ["Auditoría de accesibilidad", "WCAG", "Aria Roles"],
+    "skills_requested": ["Inglés técnico", "Mentoría en inglés", "Comunicación profesional"],
+    "author": {
+      "name": "Ana Martínez",
+      "profile_img": "",
+      "headline": "Frontend Specialist"
+    },
+    "published_date": "2024-12-10",
+    "status": "active",
+    "images": ["https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg"]
+  }
+]
