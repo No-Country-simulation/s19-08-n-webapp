@@ -1,10 +1,12 @@
 import { isAxiosError } from 'axios';
 import freeConnectApi from '@/apis/free-connect.api';
-import type { ILoginRequestData, ILoginResponseData } from '../interfaces';
+import type { IRefreshTokenRequestData, IRefreshTokenResponseData } from '../interfaces';
 
-export const login = async (data: ILoginRequestData): Promise<ILoginResponseData> => {
+export const refreshToken = async (
+  data: IRefreshTokenRequestData,
+): Promise<IRefreshTokenResponseData> => {
   try {
-    const res = await freeConnectApi.post<ILoginResponseData>('/Auth/login', data);
+    const res = await freeConnectApi.post<IRefreshTokenResponseData>('/Auth/refresh', data);
 
     if (res.status !== 200) {
       throw new Error('auth.common.generic_messages.error.went_wrong');
@@ -13,7 +15,7 @@ export const login = async (data: ILoginRequestData): Promise<ILoginResponseData
     return res.data;
   } catch (error) {
     if (isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 400)) {
-      throw new Error('auth.login.toast_messages.error.credentials');
+      throw new Error('auth.refresh_token.toast_messages.error.expired');
     } else if (error instanceof Error) {
       throw error;
     } else {

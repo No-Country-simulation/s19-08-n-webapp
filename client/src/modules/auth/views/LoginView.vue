@@ -1,74 +1,59 @@
-<template>
-  <div class="card bg-white w-96 shadow-xl ">
-    <figure class="px-10 pt-10">
-      <img src="@/assets/logo.png" alt="Imagen de login" />
-    </figure>
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useForm } from 'vee-validate';
 
-    <div class="card-body items-center text-center">
-      <h2 class="card-title">Iniciar Sesión</h2>
-      <form @submit.prevent="handleSubmit">
-        <!-- Campo de username -->
-        <Input type="text" placeholder="Username" id="username" v-model="form.username" required
-          autocomplete="username" />
-        <!-- Campo de contraseña -->
-        <Input type="password" placeholder="Contraseña" id="password" v-model="form.password" required
-          autocomplete="current-password" />
-        <!-- Botones -->
-        <div class="card-actions">
-          <button type="submit" class="btn btn-outline btn-info">Iniciar sesión</button>
-          <router-link to="/auth/register">
-            <button type="button" class="btn btn-outline btn-info">Registrarse</button>
-          </router-link>
-        </div>
-      </form>
-      <!-- Mensaje de error -->
-      <p v-if="error" class="text-red-500">{{ error }}</p>
-    </div>
-  </div>
-</template>
-
-<script lang="ts">
-
-import { defineComponent, reactive, ref } from 'vue';
 import { useAuthStore } from '../stores/auth.store';
-import Input from "../components/AuthForm.vue";
-import Button from "../components/Button.vue";
+import type { ILoginRequestData } from '../interfaces';
+import { loginFormSchema } from '../schemas/auth.schema';
+import CustomInput from '@/modules/common/components/ui/CustomInput.vue';
+import FreeConnectIcon from '@/modules/common/icons/FreeConnectIcon.vue';
+import CustomButton from '@/modules/common/components/ui/CustomButton.vue';
+import ShowHidePwdButton from '@/modules/common/components/ui/ShowHidePwdButton.vue';
 
-export default defineComponent({
-  name: 'LoginForm',
-  components: { Input, Button },
-  setup() {
-    const authStore = useAuthStore();
-    const form = reactive({
-      username: '',
-      password: '',
-    });
-    const error = ref('');
-
-    const handleSubmit = async () => {
-      if (!form.username || !form.password) {
-        error.value = 'Por favor, complete todos los campos.';
-        return;
-      }
-
-      try {
-        console.log('Datos del formulario:', form);
-        await authStore.loginAction(form);
-        console.log('Login exitoso');
-
-      } catch (err: any) {
-        error.value = err.response?.data?.message || 'Credenciales incorrectas o error del servidor';
-        console.error('Error en el login:', err);
-      }
-    };
-
-    return { form, handleSubmit, error };
-  },
+const authStore = useAuthStore();
+const { meta, handleSubmit, isSubmitting } = useForm<ILoginRequestData>({
+  validationSchema: loginFormSchema,
 });
 
+const passwordVisible = ref(false);
+
+const submitHandler = handleSubmit(authStore.startLogin);
 </script>
-<style scoped>
-.text-red-500 {
-  color: red;
-}
-</style>
+
+<template>
+  <section class="card card-compact sm:card-normal bg-base-100 shadow-xl max-w-sm mx-auto">
+    <div class="card-body">
+      <div class="mx-auto size-24" aria-hidden="true">
+        <free-connect-icon class="size-24" />
+      </div>
+
+      <h1 class="card-title justify-center text-2xl">{{ $t('auth.login.title') }}</h1>
+
+      <form @submit.prevent="submitHandler" class="flex flex-col gap-2.5">
+        <custom-input name="username" :label="$t('auth.login.form.username')" />
+        <custom-input
+          name="password"
+          :label="$t('auth.login.form.password')"
+          :type="passwordVisible ? 'text' : 'password'"
+        >
+          <template #adornment-end>
+            <show-hide-pwd-button
+              :password-visible="passwordVisible"
+              @click="passwordVisible = !passwordVisible"
+            />
+          </template>
+        </custom-input>
+        <custom-button :loading="meta.valid && isSubmitting" :disabled="meta.valid && isSubmitting">
+          {{ $t('auth.login.form.btn_submit') }}
+        </custom-button>
+      </form>
+
+      <div class="flex justify-center gap-1 mt-2">
+        <span class="text-gray-500">{{ $t('auth.login.do_not_have_account') }}</span>
+        <router-link to="/auth/register" class="text-secondary font-semibold hover:underline">
+          {{ $t('auth.login.sign_up_title') }}
+        </router-link>
+      </div>
+    </div>
+  </section>
+</template>
