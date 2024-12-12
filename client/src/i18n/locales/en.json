@@ -1,0 +1,184 @@
+{
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "form": {
+        "username": "Username",
+        "password": "Password",
+        "btn_submit": "Sign In"
+      },
+      "do_not_have_account": "Don't have an account?",
+      "sign_up_title": "Sign Up",
+      "toast_messages": {
+        "error": {
+          "credentials": "Invalid Credentials."
+        },
+        "success": {
+          "login": "Log in successfully."
+        }
+      }
+    },
+    "register": {
+      "title": "Create an account",
+      "form": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "username": "Username",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "btn_submit": "Create account",
+        "custom_validations": {
+          "password": {
+            "req_number": "Password requires a number.",
+            "req_lower_case": "Password requires a lowercase letter.",
+            "req_upper_case": "Password requires an uppercase letter.",
+            "req_symbol": "Password requires a symbol."
+          },
+          "confirm_password": "Passwords don't match."
+        }
+      },
+      "already_have_account": "Already have an account?",
+      "sign_in_title": "Sign In",
+      "toast_messages": {
+        "error": {
+          "username_taken": "Username \"{username}\"  already exists."
+        },
+        "success": {
+          "registered": "Your account has been successfully created."
+        }
+      }
+    },
+    "refresh_token": {
+      "toast_messages": {
+        "error": {
+          "expired": "Your session has expired. Please log in again."
+        }
+      }
+    },
+    "common": {
+      "generic_messages": {
+        "error": {
+          "went_wrong": "Something went wrong, please try again later.",
+          "server_error": "Internal Server Error.",
+          "field_error": "One or more fields have errors."
+        }
+      }
+    }
+  },
+  "posts": {
+    "new": "Create a new post.",
+    "btn_start": "Start a post",
+    "card": {
+      "btn_collab": "Collaborate",
+      "status": {
+        "new": "NEW",
+        "active": "ACTIVE",
+        "completed": "COMPLETED"
+      },
+      "skills_offered": "Skills offered",
+      "skills_requested": "Skills requested"
+    }
+  },
+  "common": {
+    "navbar": {
+      "home": "Home",
+      "messaging": "Messaging",
+      "projects": "Projects",
+      "search": "Search",
+      "profile": "Profile",
+      "settings": "Settings",
+      "appearance": "Theme",
+      "login": "Login",
+      "logout": "Log Out",
+      "notifications": "Notifications"
+    },
+    "theme_controller": {
+      "select": "Select a display theme:",
+      "system": "system",
+      "light": "light",
+      "dark": "dark"
+    },
+    "lang_controller": {
+      "en": "English",
+      "es": "Spanish"
+    },
+    "not_found": {
+      "title": "Oops! Page not found",
+      "subtitle": "The page you're looking for doesn't exist or has been moved.",
+      "btn_home": "Go Home",
+      "btn_refresh": "Refresh"
+    }
+  },
+  "user_profile": {
+    "joined": "Joined March",
+    "stats": {
+      "title": "Stats",
+      "total_likes": "Total Likes",
+      "page_views": "Page Views",
+      "more": "more than last month",
+      "tasks_done": "Tasks done",
+      "tasks_remaining": "tasks remaining"
+    },
+    "recent_posts": "Recent posts",
+    "btn_create_post": "Create a post"
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "account": "Account",
+    "notifications": "Notifications",
+    "lang": {
+      "title": "section for language selector",
+      "lang": "Language",
+      "help_text": "Select the language you use on {companyName}"
+    }
+  },
+  "yup": {
+    "mixed": {
+      "default": "This field is invalid.",
+      "required": "This field is required.",
+      "oneOf": "The value must be one of the following: {values}.",
+      "notOneOf": "The value must not be one of the following: {values}.",
+      "defined": "This field must be defined.",
+      "notNull": "This field cannot be null.",
+      "notType": "The value must be a {type}."
+    },
+    "string": {
+      "length": "The field must be exactly {length} characters long.",
+      "min": "The field must be at least {min} characters long.",
+      "max": "The field must be at most {max} characters long.",
+      "matches": "The value must match the following pattern: \"{regex}\".",
+      "email": "Please enter a valid email address.",
+      "url": "Please enter a valid URL.",
+      "uuid": "Please enter a valid UUID.",
+      "trim": "The value must not contain leading or trailing spaces.",
+      "lowercase": "The value must be in lowercase.",
+      "uppercase": "The value must be in uppercase."
+    },
+    "number": {
+      "min": "The value must be greater than or equal to {min}.",
+      "max": "The value must be less than or equal to {max}.",
+      "lessThan": "The value must be less than {less}.",
+      "moreThan": "The value must be more than {more}.",
+      "positive": "The value must be a positive number.",
+      "negative": "The value must be a negative number.",
+      "integer": "The value must be an integer."
+    },
+    "date": {
+      "min": "The date must be later than or equal to {min}.",
+      "max": "The date must be earlier than or equal to {max}."
+    },
+    "array": {
+      "min": "The array must have at least {min} items.",
+      "max": "The array must have at most {max} items.",
+      "length": "The array must have exactly {length} items."
+    },
+    "boolean": {
+      "isValue": "The value must be {value}."
+    },
+    "object": {
+      "noUnknown": "The object contains keys that are not allowed: {unknown}."
+    }
+  }
+}

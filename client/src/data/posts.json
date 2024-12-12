@@ -1,0 +1,81 @@
+[
+  {
+    "id": 1,
+    "title": "Diseño de logo profesional a cambio de optimización SEO",
+    "description": "Soy diseñador gráfico con experiencia en branding y puedo crear un logo único para tu proyecto. A cambio, busco ayuda para optimizar mi sitio web y mejorar su posicionamiento en motores de búsqueda.",
+    "skills_offered": ["Diseño gráfico", "Creación de logos", "Branding"],
+    "skills_requested": ["SEO", "Optimización de sitios web", "Google Analytics"],
+    "author": {
+      "name": "Juan Pérez",
+      "profile_img": "https://mighty.tools/mockmind-api/content/human/57.jpg",
+      "headline": "Diseñador UX/UI"
+    },
+    "published_date": "2024-11-13",
+    "status": "new",
+    "images": ["https://images.pexels.com/photos/669612/pexels-photo-669612.jpeg"]
+  },
+  {
+    "id": 2,
+    "title": "Programación de landing page a cambio de copywriting",
+    "description": "Puedo desarrollar una landing page funcional y responsiva en HTML/CSS. Estoy buscando a alguien que me ayude con los textos para mi portafolio.",
+    "skills_offered": ["HTML", "CSS", "JavaScript"],
+    "skills_requested": ["Copywriting", "Escritura persuasiva", "Marketing de contenidos"],
+    "author": {
+      "name": "Ana Martínez",
+      "profile_img": "https://mighty.tools/mockmind-api/content/human/44.jpg",
+      "headline": "Frontend Specialist"
+    },
+    "published_date": "2024-11-12",
+    "status": "active",
+    "images": ["https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg"]
+  },
+  {
+    "id": 3,
+    "title": "Edición de video profesional a cambio de ilustraciones digitales",
+    "description": "Soy editor de video con experiencia en proyectos comerciales y estoy buscando un ilustrador digital para un proyecto personal.",
+    "skills_offered": ["Edición de video", "Postproducción", "Efectos visuales"],
+    "skills_requested": ["Ilustración digital", "Diseño artístico", "Creación de personajes"],
+    "author": {
+      "name": "Carlos Gómez",
+      "profile_img": "https://mighty.tools/mockmind-api/content/human/7.jpg",
+      "headline": "Producción audiovisual"
+    },
+    "published_date": "2024-11-10",
+    "status": "completed",
+    "images": [
+      "https://images.pexels.com/photos/17561470/pexels-photo-17561470/free-photo-of-telefono-inteligente-y-computadora-portatil-dispositivos-electronicos-creativos.jpeg"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Desarrollo de chatbot a cambio de estrategias de redes sociales",
+    "description": "Tengo experiencia creando chatbots para diferentes plataformas. Necesito ayuda para mejorar la estrategia de mi negocio en redes sociales.",
+    "skills_offered": ["Programación de chatbots", "Automatización", "Python"],
+    "skills_requested": ["Gestión de redes sociales", "Marketing digital", "Publicidad en redes"],
+    "author": {
+      "name": "Laura Sánchez",
+      "profile_img": "https://mighty.tools/mockmind-api/content/human/49.jpg",
+      "headline": "AI Developer | Cloud Engineer"
+    },
+    "published_date": "2024-11-09",
+    "status": "active",
+    "images": ["https://images.pexels.com/photos/3194519/pexels-photo-3194519.jpeg"]
+  },
+  {
+    "id": 5,
+    "title": "Traducción de documentos técnicos a cambio de diseño web",
+    "description": "Puedo traducir documentos técnicos (inglés-español) con precisión. Necesito ayuda con el diseño de un sitio web para mi portafolio.",
+    "skills_offered": ["Traducción", "Redacción técnica", "Edición de textos"],
+    "skills_requested": ["Diseño web", "UI/UX", "Maquetación web"],
+    "author": {
+      "name": "Sofía Ramírez",
+      "profile_img": "https://mighty.tools/mockmind-api/content/human/56.jpg",
+      "headline": "Traductor Técnico | Explorando Diseño Web"
+    },
+    "published_date": "2024-11-11",
+    "status": "active",
+    "images": [
+      "https://images.pexels.com/photos/29459444/pexels-photo-29459444/free-photo-of-codigo-colorido-en-la-pantalla-de-la-computadora-para-el-desarrollo-web.jpeg"
+    ]
+  }
+]

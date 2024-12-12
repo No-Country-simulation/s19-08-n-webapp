@@ -1,33 +1,23 @@
-import freeConectApi from '@/apis/freeConect.api';
-import type { LoginData } from '../interfaces/userInterfaces';
-import type { RegisterData } from '../interfaces/registerData';
+import { isAxiosError } from 'axios';
+import freeConnectApi from '@/apis/free-connect.api';
+import type { ILoginRequestData, ILoginResponseData } from '../interfaces';
 
-export const login = async (data: LoginData) => {
+export const login = async (data: ILoginRequestData): Promise<ILoginResponseData> => {
   try {
-    console.log('Datos enviados al login:', data);
+    const res = await freeConnectApi.post<ILoginResponseData>('/Auth/login', data);
 
-    const response = await freeConectApi.post('/api/Auth/login', data);
+    if (res.status !== 200) {
+      throw new Error('auth.common.generic_messages.error.went_wrong');
+    }
 
-    console.log('Respuesta del servidor:', response.data);
-
-    return response.data;
-  } catch (error: any) {
-    console.error('Error en el login:', error.response?.data || error.message);
-    throw error;
-  }
-};
-
-export const register = async (data: RegisterData) => {
-  try {
-    console.log('Datos enviados al registro:', data);
-
-    const response = await freeConectApi.post('/api/Auth/register', data);
-
-    console.log('Respuesta del servidor:', response.data);
-
-    return response.data;
-  } catch (error: any) {
-    console.error('Error en el register:', error.response?.data || error.message);
-    throw error;
+    return res.data;
+  } catch (error) {
+    if (isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 400)) {
+      throw new Error('auth.login.toast_messages.error.credentials');
+    } else if (error instanceof Error) {
+      throw error;
+    } else {
+      throw new Error('auth.common.generic_messages.error.server_error');
+    }
   }
 };
