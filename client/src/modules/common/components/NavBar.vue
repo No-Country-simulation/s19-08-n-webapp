@@ -94,7 +94,7 @@ const logoutHandler = () => {
             </div>
           </li>
           <li>
-            <router-link to="/profile/juan" class="justify-between">
+            <router-link :to="`/profile/${authStore.user?.userName}`" class="justify-between">
               {{ $t('common.navbar.profile') }}
               <circle-user-round-icon :size="16" aria-hidden="true" />
             </router-link>
