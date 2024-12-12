@@ -1,0 +1,184 @@
+{
+  "auth": {
+    "login": {
+      "title": "Iniciar sesión",
+      "form": {
+        "username": "Nombre de usuario",
+        "password": "Contraseña",
+        "btn_submit": "Iniciar sesión"
+      },
+      "do_not_have_account": "¿No tienes cuenta?",
+      "sign_up_title": "Regístrate",
+      "toast_messages": {
+        "error": {
+          "credentials": "Credenciales incorrectas."
+        },
+        "success": {
+          "login": "Inicio de sesión exitoso."
+        }
+      }
+    },
+    "register": {
+      "title": "Crea una cuenta",
+      "form": {
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "username": "Nombre de usuario",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "confirmPassword": "Confirmar contraseña",
+        "btn_submit": "Crear cuenta",
+        "custom_validations": {
+          "password": {
+            "req_number": "La contraseña requiere un número.",
+            "req_lower_case": "La contraseña requiere una letra minúscula.",
+            "req_upper_case": "La contraseña requiere una letra mayúscula.",
+            "req_symbol": "La contraseña requiere un símbolo."
+          },
+          "confirm_password": "Las contraseñas no coinciden."
+        }
+      },
+      "already_have_account": "¿Ya tienes una cuenta?",
+      "sign_in_title": "Inicia Sesión",
+      "toast_messages": {
+        "error": {
+          "username_taken": "El nombre de usuario \"{username}\" ya existe."
+        },
+        "success": {
+          "registered": "Registro exitoso. Por favor, inicia sesión."
+        }
+      }
+    },
+    "refresh_token": {
+      "toast_messages": {
+        "error": {
+          "expired": "Su sesión ha expirado. Por favor, vuelva a iniciar sesión."
+        }
+      }
+    },
+    "common": {
+      "generic_messages": {
+        "error": {
+          "went_wrong": "Algo salió mal, por favor intenta más tarde.",
+          "server_error": "Error interno del servidor.",
+          "field_error": "Uno o más campos tienen errores."
+        }
+      }
+    }
+  },
+  "posts": {
+    "new": "Crear una nueva publicación.",
+    "btn_start": "Inicia una publicación",
+    "card": {
+      "btn_collab": "Colaborar",
+      "status": {
+        "new": "NUEVO",
+        "active": "ACTIVO",
+        "completed": "COMPLETADO"
+      },
+      "skills_offered": "Habilidades ofrecidas",
+      "skills_requested": "Habilidades requeridas"
+    }
+  },
+  "common": {
+    "navbar": {
+      "home": "Inicio",
+      "messaging": "Mensajería",
+      "projects": "Proyectos",
+      "search": "Buscar",
+      "profile": "Perfil",
+      "settings": "Configuración",
+      "appearance": "Aspecto",
+      "login": "Ingresar",
+      "logout": "Cerrar sesión",
+      "notifications": "Notificaciones"
+    },
+    "theme_controller": {
+      "select": "Seleccione un tema de visualización:",
+      "system": "sistema",
+      "light": "claro",
+      "dark": "oscuro"
+    },
+    "lang_controller": {
+      "en": "Inglés",
+      "es": "Español"
+    },
+    "not_found": {
+      "title": "¡Ups! Página no encontrada",
+      "subtitle": "La página que buscas no existe o ha sido movida.",
+      "btn_home": "Ir al Inicio",
+      "btn_refresh": "Recargar"
+    }
+  },
+  "user_profile": {
+    "joined": "Se unió en marzo del",
+    "stats": {
+      "title": "Estadisticas",
+      "total_likes": "Total de Likes",
+      "page_views": "Visitas",
+      "more": "más que el mes pasado",
+      "tasks_done": "Tareas completadas",
+      "tasks_remaining": "tareas pendientes"
+    },
+    "recent_posts": "Publicaciones recientes",
+    "btn_create_post": "Crear publicación"
+  },
+  "settings": {
+    "title": "Configuración",
+    "general": "General",
+    "account": "Cuenta",
+    "notifications": "Notificaciones",
+    "lang": {
+      "title": "sección para el selector de idioma",
+      "lang": "Idioma",
+      "help_text": "Seleccione el idioma que utiliza en {companyName}"
+    }
+  },
+  "yup": {
+    "mixed": {
+      "default": "Este campo no es válido.",
+      "required": "Este campo es obligatorio.",
+      "oneOf": "El valor debe ser uno de los siguientes: {values}.",
+      "notOneOf": "El valor no debe ser uno de los siguientes: {values}.",
+      "defined": "Este campo debe estar definido.",
+      "notNull": "Este campo no puede ser nulo.",
+      "notType": "El valor debe ser un {type}."
+    },
+    "string": {
+      "length": "El campo debe tener exactamente {length} caracteres.",
+      "min": "El campo debe tener al menos {min} caracteres.",
+      "max": "El campo debe tener como máximo {max} caracteres.",
+      "matches": "El valor debe coincidir con el siguiente patrón: \"{regex}\".",
+      "email": "Ingrese una dirección de correo electrónico válida.",
+      "url": "Por favor, introduce una URL válida.",
+      "uuid": "Por favor, introduce un UUID válido.",
+      "trim": "El valor no debe contener espacios al principio o al final.",
+      "lowercase": "El valor debe estar en minúsculas.",
+      "uppercase": "El valor debe estar en mayúsculas."
+    },
+    "number": {
+      "min": "El valor debe ser mayor o igual a {min}.",
+      "max": "El valor debe ser menor o igual a {max}.",
+      "lessThan": "El valor debe ser menor que {less}.",
+      "moreThan": "El valor debe ser mayor que {more}.",
+      "positive": "El valor debe ser un número positivo.",
+      "negative": "El valor debe ser un número negativo.",
+      "integer": "El valor debe ser un número entero."
+    },
+    "date": {
+      "min": "La fecha debe ser posterior o igual a {min}.",
+      "max": "La fecha debe ser anterior o igual a {max}."
+    },
+    "array": {
+      "min": "El arreglo debe tener al menos {min} elementos.",
+      "max": "El arreglo debe tener como máximo {max} elementos.",
+      "length": "El arreglo debe tener exactamente {length} elementos."
+    },
+    "boolean": {
+      "isValue": "El valor debe ser {value}."
+    },
+    "object": {
+      "noUnknown": "El objeto contiene claves no permitidas: {unknown}."
+    }
+  }
+}
