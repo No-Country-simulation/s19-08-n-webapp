@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
+
+import { useAuthStore } from '@/modules/auth/stores/auth.store';
 import CustomModal from '@/modules/common/components/ui/CustomModal.vue';
 
 interface Props {
@@ -7,6 +9,8 @@ interface Props {
 }
 
 defineProps<Props>();
+
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -18,7 +22,7 @@ defineProps<Props>();
         :aria-expanded="open"
         :aria-controls="undefined"
         aria-haspopup="dialog"
-        @click="showModal()"
+        @click="authStore.isAuthenticated ? showModal() : $router.push({ name: 'login' })"
       >
         <slot />
       </button>

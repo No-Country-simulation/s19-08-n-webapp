@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import PostModalCreate from './PostModalCreate.vue';
+import { useAuthStore } from '@/modules/auth/stores/auth.store';
+
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -8,7 +11,7 @@ import PostModalCreate from './PostModalCreate.vue';
     <div class="card-body flex-row">
       <div class="avatar">
         <div class="size-10 sm:size-12 rounded-full">
-          <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+          <img :src="authStore.profileImg" />
         </div>
       </div>
       <post-modal-create

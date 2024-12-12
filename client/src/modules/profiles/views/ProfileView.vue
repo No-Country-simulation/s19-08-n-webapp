@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { CalendarIcon, LinkIcon, MapPinIcon, PencilIcon } from 'lucide-vue-next';
 
-import posts from '@/data/posts.json';
+import posts from '@/data/user_posts.json';
 import PostCard from '@/modules/posts/components/PostCard.vue';
+import { useAuthStore } from '@/modules/auth/stores/auth.store';
 import PostModalCreate from '@/modules/posts/components/PostModalCreate.vue';
+
+const authStore = useAuthStore();
 </script>
 
 <template>
-  <div class="px-3 mt-4">
+  <div class="px-3 mt-4 animate__animated animate__fadeIn animate__faster">
     <main class="flex flex-col lg:flex-row gap-4 max-w-5xl mx-auto">
       <div class="lg:w-2/5">
         <section class="card bg-base-100 h-fit mb-4">
@@ -18,16 +21,13 @@ import PostModalCreate from '@/modules/posts/components/PostModalCreate.vue';
 
             <div class="avatar mx-auto">
               <div class="size-24 rounded-full">
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  alt="Profile image of user"
-                />
+                <img :src="authStore.profileImg" alt="Profile image of user" />
               </div>
             </div>
 
             <div class="mx-auto text-center">
-              <h1 class="text-3xl font-semibold">Ana Martínez</h1>
-              <span class="text-lg text-gray-500">@anam</span>
+              <h1 class="text-3xl font-semibold">{{ authStore.user?.fullName }}</h1>
+              <span class="text-lg text-gray-500">@{{ authStore.user?.userName }}</span>
             </div>
 
             <div>
@@ -45,11 +45,11 @@ import PostModalCreate from '@/modules/posts/components/PostModalCreate.vue';
               </div>
               <div class="flex items-center gap-2">
                 <link-icon :size="16" class="text-gray-500" />
-                <span>anam.dev</span>
+                <span>{{ authStore.user?.userName }}.dev</span>
               </div>
               <div class="flex items-center gap-2">
                 <calendar-icon :size="16" class="text-gray-500" />
-                <span class="text-gray-500">Joined March 2020</span>
+                <span class="text-gray-500">{{ $t('user_profile.joined') }} 2020</span>
               </div>
             </div>
 
@@ -63,7 +63,7 @@ import PostModalCreate from '@/modules/posts/components/PostModalCreate.vue';
 
         <section class="card bg-base-100 h-fit">
           <div class="card-body">
-            <h1 class="text-2xl font-semibold mb-2">Stats</h1>
+            <h1 class="text-2xl font-semibold mb-2">{{ $t('user_profile.stats.title') }}</h1>
             <div class="stats stats-vertical shadow">
               <div class="stat">
                 <div class="stat-figure text-primary">
@@ -81,9 +81,9 @@ import PostModalCreate from '@/modules/posts/components/PostModalCreate.vue';
                     ></path>
                   </svg>
                 </div>
-                <div class="stat-title">Total Likes</div>
+                <div class="stat-title">{{ $t('user_profile.stats.total_likes') }}</div>
                 <div class="stat-value text-primary">25.6K</div>
-                <div class="stat-desc">21% more than last month</div>
+                <div class="stat-desc">21% {{ $t('user_profile.stats.more') }}</div>
               </div>
 
               <div class="stat">
@@ -102,24 +102,24 @@ import PostModalCreate from '@/modules/posts/components/PostModalCreate.vue';
                     ></path>
                   </svg>
                 </div>
-                <div class="stat-title">Page Views</div>
+                <div class="stat-title">{{ $t('user_profile.stats.page_views') }}</div>
                 <div class="stat-value text-secondary">2.6M</div>
-                <div class="stat-desc">21% more than last month</div>
+                <div class="stat-desc">21% {{ $t('user_profile.stats.more') }}</div>
               </div>
 
               <div class="stat">
                 <div class="stat-figure text-secondary">
                   <div class="avatar online">
                     <div class="w-16 rounded-full">
-                      <img
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                      />
+                      <img :src="authStore.profileImg" />
                     </div>
                   </div>
                 </div>
                 <div class="stat-value">86%</div>
-                <div class="stat-title">Tasks done</div>
-                <div class="stat-desc text-secondary">31 tasks remaining</div>
+                <div class="stat-title">{{ $t('user_profile.stats.tasks_done') }}</div>
+                <div class="stat-desc text-secondary">
+                  31 {{ $t('user_profile.stats.tasks_remaining') }}
+                </div>
               </div>
             </div>
           </div>
@@ -129,12 +129,27 @@ import PostModalCreate from '@/modules/posts/components/PostModalCreate.vue';
       <section class="lg:w-3/5">
         <div class="card card-compact bg-base-100 mb-4">
           <div class="card-body flex-row items-center justify-between">
-            <h2 class="text-2xl font-semibold">Recent posts</h2>
-            <post-modal-create btn-class="btn btn-primary">Create a post</post-modal-create>
+            <h2 class="text-2xl font-semibold">{{ $t('user_profile.recent_posts') }}</h2>
+            <post-modal-create btn-class="btn btn-primary">{{
+              $t('user_profile.btn_create_post')
+            }}</post-modal-create>
           </div>
         </div>
         <div class="flex flex-col gap-4 pb-4">
-          <post-card v-for="(post, index) in posts" :key="post.id" :post="post" :num="index + 1" />
+          <post-card
+            v-for="(post, index) in posts"
+            :key="post.id"
+            :post="{
+              ...post,
+              author: {
+                ...post.author,
+                name: authStore.user?.fullName!,
+                profile_img: authStore.profileImg,
+              },
+            }"
+            :num="index + 1"
+            is-owner
+          />
         </div>
       </section>
     </main>

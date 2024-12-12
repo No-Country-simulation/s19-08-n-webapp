@@ -5,7 +5,7 @@ import PersonShieldIcon from '@/modules/common/icons/PersonShieldIcon.vue';
 </script>
 
 <template>
-  <div class="bg-base-300 h-screen">
+  <div class="bg-base-300 h-screen animate__animated animate__fadeIn animate__faster">
     <nav-bar />
 
     <div class="mx-auto max-w-4xl mt-4 px-4">
