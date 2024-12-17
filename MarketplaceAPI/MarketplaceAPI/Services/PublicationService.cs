@@ -4,11 +4,13 @@ using MarketplaceAPI.Models;
 using MarketplaceAPI.Services.Interfaces;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+
 namespace MarketplaceAPI.Services
 {
     public class PublicationService : IPublicationService
     {
         private readonly DBContextMarketplace _dbContext;
+
         public PublicationService(DBContextMarketplace dbContext)
         {
             _dbContext = dbContext;
@@ -39,10 +41,12 @@ namespace MarketplaceAPI.Services
                 idUser = publication.idUser
             };
         }
+
         public async Task<PublicationDTO?> ActualizarPublicacion(PublicationDTO publicationDto)
         {
             var publication = await _dbContext.Publications.FindAsync(publicationDto.idPublication);
             if (publication == null) return null;
+
             publication.title = publicationDto.title;
             publication.image = publicationDto.image;
             publication.description = publicationDto.description;
@@ -52,7 +56,7 @@ namespace MarketplaceAPI.Services
             {
                 idPublication = publication.idPublication,
                 title = publication.title,
-                image = publication.image,
+                image = publication.image,  
                 description = publication.description,
                 idUser = publication.idUser
             };
@@ -65,7 +69,8 @@ namespace MarketplaceAPI.Services
             await _dbContext.SaveChangesAsync();
             return true;
         }
-
+    }
+}
         public async Task<PublicationDTO> AgregarPublicacion(PublicationDTO publicationDto)
         {
             var newPublication = new Publication
@@ -87,8 +92,7 @@ namespace MarketplaceAPI.Services
                 image = newPublication.image,
                 idUser = newPublication.idUser
             };
-
-
         }
     }
 }
+

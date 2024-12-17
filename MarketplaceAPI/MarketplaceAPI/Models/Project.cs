@@ -7,6 +7,7 @@ namespace MarketplaceAPI.Models
     public class Project
     {
         [Key]
+      
         public int idProject { get; set; } // PK
 
         //-----------------------------

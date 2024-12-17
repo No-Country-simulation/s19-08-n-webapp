@@ -1,4 +1,5 @@
 ﻿using MarketplaceAPI.DTOs;
+using MarketplaceAPI.Models;
 
 namespace MarketplaceAPI.Services.Interfaces
 {
@@ -8,7 +9,9 @@ namespace MarketplaceAPI.Services.Interfaces
         Task<PublicationDTO?> ObtenerPublicacion(int idPublication);
         Task<PublicationDTO?> ActualizarPublicacion(PublicationDTO publicationDto);
         Task<bool> EliminarPublicacion(int idPublication);
-        Task<PublicationDTO> AgregarPublicacion(PublicationDTO publicationDto);
-
     }
 }
+        Task<PublicationDTO> AgregarPublicacion(PublicationDTO publicationDto);
+    }
+}
+
