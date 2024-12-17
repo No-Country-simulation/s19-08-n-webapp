@@ -11,4 +11,7 @@ namespace MarketplaceAPI.Services.Interfaces
         Task<bool> EliminarPublicacion(int idPublication);
     }
 }
-//PublicationDTO
+        Task<PublicationDTO> AgregarPublicacion(PublicationDTO publicationDto);
+    }
+}
+

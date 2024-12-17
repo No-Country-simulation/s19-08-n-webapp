@@ -15,7 +15,6 @@ namespace MarketplaceAPI.Services
         {
             _dbContext = dbContext;
         }
-
         public async Task<IEnumerable<PublicationDTO>> ListarPublicaciones()
         {
             return await _dbContext.Publications
@@ -29,12 +28,10 @@ namespace MarketplaceAPI.Services
                 })
                 .ToListAsync();
         }
-
         public async Task<PublicationDTO?> ObtenerPublicacion(int idPublication)
         {
             var publication = await _dbContext.Publications.FindAsync(idPublication);
             if (publication == null) return null;
-
             return new PublicationDTO
             {
                 idPublication = publication.idPublication,
@@ -53,10 +50,8 @@ namespace MarketplaceAPI.Services
             publication.title = publicationDto.title;
             publication.image = publicationDto.image;
             publication.description = publicationDto.description;
-
             _dbContext.Publications.Update(publication);
             await _dbContext.SaveChangesAsync();
-
             return new PublicationDTO
             {
                 idPublication = publication.idPublication,
@@ -66,15 +61,38 @@ namespace MarketplaceAPI.Services
                 idUser = publication.idUser
             };
         }
-
         public async Task<bool> EliminarPublicacion(int idPublication)
         {
             var publication = await _dbContext.Publications.FindAsync(idPublication);
             if (publication == null) return false;
-
             _dbContext.Publications.Remove(publication);
             await _dbContext.SaveChangesAsync();
             return true;
         }
     }
 }
+        public async Task<PublicationDTO> AgregarPublicacion(PublicationDTO publicationDto)
+        {
+            var newPublication = new Publication
+            {
+                title = publicationDto.title,
+                description = publicationDto.description,
+                image = publicationDto.image,
+                idUser = publicationDto.idUser
+            };
+
+            _dbContext.Publications.Add(newPublication);
+            await _dbContext.SaveChangesAsync();
+
+            return new PublicationDTO
+            {
+                idPublication = newPublication.idPublication,
+                title = newPublication.title,
+                description = newPublication.description,
+                image = newPublication.image,
+                idUser = newPublication.idUser
+            };
+        }
+    }
+}
+

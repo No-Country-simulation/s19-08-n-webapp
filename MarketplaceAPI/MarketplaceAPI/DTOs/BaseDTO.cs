@@ -10,7 +10,6 @@
                 Message = "Ok!"
             };
         }
-
         public object CreateResponse(string publicKey, bool success = true)
         {
             return new
@@ -21,4 +20,3 @@
             };
         }
     }
-}

@@ -29,8 +29,10 @@ namespace MarketplaceAPI.Controllers
             if (publication == null)
                 return NotFound(new { message = "Publicación no encontrada." });
 
+
             return Ok(publication);
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> ActualizarPublicacion(int id, [FromBody] PublicationDTO publicationDto)
@@ -38,13 +40,13 @@ namespace MarketplaceAPI.Controllers
             if (id != publicationDto.idPublication)
                 return BadRequest(new { message = "El ID de la publicación no coincide." });
 
+
             var updatedPublication = await _publicationService.ActualizarPublicacion(publicationDto);
             if (updatedPublication == null)
                 return NotFound(new { message = "Publicación no encontrada para actualizar." });
 
             return Ok(updatedPublication);
         }
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> EliminarPublicacion(int id)
         {
@@ -54,5 +56,15 @@ namespace MarketplaceAPI.Controllers
 
             return NoContent();
         }
+        [HttpPost]
+        public async Task<IActionResult> AgregarPublicacion([FromBody] PublicationDTO publicationDto)
+        {
+            if (publicationDto == null)
+                return BadRequest(new { message = "Datos de la publicación no válidos." });
+
+            var createdPublication = await _publicationService.AgregarPublicacion(publicationDto);
+            return CreatedAtAction(nameof(ObtenerPublicacion), new { id = createdPublication.idPublication }, createdPublication);
+        }
     }
 }
+

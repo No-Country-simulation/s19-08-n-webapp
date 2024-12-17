@@ -1,8 +1,9 @@
 # :globe_with_meridians: :arrows_counterclockwise: FreeConnect | Proyecto MVP NoCountry  
-[![pixelcut-export-ZW6-c-Y-6t-transformed.png](https://i.postimg.cc/zfsRtXfy/pixelcut-export-ZW6-c-Y-6t-transformed.png)](https://postimg.cc/mcSDh4C4)
-  
-  
-logo -Pendiente-. -  
+
+<div align="center">
+ <img src="https://i.postimg.cc/6365KB3t/logo-nc-removebg-preview-3.png" width= "200" height="170">
+</div>
+
 
 ## :bulb: Propuesta 
   
